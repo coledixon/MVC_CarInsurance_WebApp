@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CarInsuranceProjApp.Models.Car>
+
+@{
+    ViewBag.Title = "Success";
+}
+
+<h2>Success</h2>
+
+<p>
+    @Html.ActionLink("Index", "Index")
+</p>
+
+<!--CD: built success page-->
+<table class="table">
+    <tr>
+        <th>
+            <h6>Your</h6> @Html.DisplayNameFor(model => model.QuoteTotal) <h6>is:</h6>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuoteTotal)
+            </td>
+        </tr>
+    }
+
+</table>
+
