@@ -1,32 +1,44 @@
-﻿@model IEnumerable<CarInsuranceProjApp.Models.Car>
+﻿@model IEnumerable<CarInsurance_WebApp.Models.vinsuree_data_all>
 
 @{
     ViewBag.Title = "Success";
 }
 
-<h2>Success</h2>
-
 <p>
-    @Html.ActionLink("Index", "Index")
+
 </p>
 
-<!--CD: built success page-->
-<table class="table">
-    <tr>
-        <th>
-            <h6>Your</h6> @Html.DisplayNameFor(model => model.QuoteTotal) <h6>is:</h6>
-        </th>
-        <th></th>
-    </tr>
+<table class="highlight indigo">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("prev. quote")
+            </th>
+            <th>
+                @Html.DisplayName("curr. quote")
+            </th>
+            <th>
+                @Html.DisplayName("delta")
+            </th>
+        </tr>
+    </thead>
 
-    @foreach (var item in Model)
+    <tbody>
+    @foreach (var rec in Model)
     {
+        decimal delta = (decimal.Subtract(rec.prev_quote.AsDecimal(), rec.curr_quote.AsDecimal())); // get delta between quotes
+        string _delta = delta > rec.prev_quote.AsDecimal() ? "+" + delta.ToString() : "-" + delta.ToString();// parse if client svaed on quote
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.QuoteTotal)
+                @Html.DisplayFor(modelItem => rec.prev_quote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => rec.curr_quote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => _delta) <!-- display parsed value -->
             </td>
         </tr>
     }
-
 </table>
 

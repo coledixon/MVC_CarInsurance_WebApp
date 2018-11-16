@@ -1,4 +1,4 @@
-﻿@model CarInsuranceProjApp.Models.Car
+﻿@model CarInsurance_WebApp.Models.vinsuree_data_all
 
 @{
     ViewBag.Title = "Delete";
@@ -12,83 +12,73 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayName("first: ")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.first_name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayName("last: ")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.last_name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EmailAddress)
+            @Html.DisplayName("email: ")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.EmailAddress)
+            @Html.DisplayFor(model => model.email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
+            @Html.DisplayName("dob: ")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.DateOfBirth)
+            @Html.DisplayFor(model => model.dob)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CarYear)
+            @Html.DisplayName("car year: ")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.CarYear)
+            @Html.DisplayFor(model => model.car_year)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CarMake)
+            @Html.DisplayName("car make: ")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.CarMake)
+            @Html.DisplayFor(model => model.car_make)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CarModel)
+            @Html.DisplayName("car model: ")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.CarModel)
+            @Html.DisplayFor(model => model.car_model)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Tickets)
+            @Html.DisplayName("# of tickets: ")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Tickets)
+            @Html.DisplayFor(model => model.tickets)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Dui)
+            @Html.DisplayName("dui: ")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Dui)
+            @Html.DisplayFor(model => model.dui)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Coverage)
+            @Html.DisplayName("coverage type: ")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Coverage)
+            @Html.DisplayFor(model => model.coverage_type)
         </dd>
 
     </dl>
@@ -96,9 +86,9 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Return", "Index", new { id = "" }, new { @class = "waves-effect waves-teal btn-flat" })
+    </div>
     }
 </div>
