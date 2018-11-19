@@ -156,7 +156,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\WebAppDataController.cs" />
-    <Compile Include="Controllers\WebAppHomeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WebAppExtController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -267,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\WebAppData\" />
+    <Folder Include="Views\WebAppExt\" />
     <Folder Include="Views\WebAppHome\" />
   </ItemGroup>
   <ItemGroup>
