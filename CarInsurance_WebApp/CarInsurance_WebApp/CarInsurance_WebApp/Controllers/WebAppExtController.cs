@@ -32,5 +32,32 @@ namespace CarInsurance_WebApp.Controllers
 
             return quote.ToString();
         }
+
+        // validate/parse state code submitted exists in US
+        public string ValidateParseStateCode(string state)
+        {
+            List<US_State> _states;
+
+            _states = StateCodeArray.States().ToList();
+
+            if (state.Length > 2)
+            {
+                foreach (US_State s in _states)
+                {
+                    if (s.Name.ToLower() == state.ToLower()) { state = s.Abbr.ToUpper(); }
+                }
+                if (state.Length > 2) { throw new Exception("Invalid state name for US."); }
+            }
+            else
+            {
+                foreach (US_State ab in _states)
+                {
+                    if (ab.Abbr.ToUpper() == state.ToUpper()) { state = state.ToUpper(); }
+                    else { throw new Exception("Invalid state code for US."); }
+                }
+            }
+
+            return state;
+        }
     }
 }

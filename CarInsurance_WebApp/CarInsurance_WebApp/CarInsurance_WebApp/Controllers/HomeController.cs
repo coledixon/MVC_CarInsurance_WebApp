@@ -18,24 +18,39 @@ namespace CarInsurance_WebApp.Controllers
         WebAppDataController _data = new WebAppDataController();
         WebAppExtController _ext = new WebAppExtController();
 
-        #region actions
+        #region GET_actions
+        // GET : Index page
         public ActionResult Index()
         {
             // pass data from db to View
             return View(_db.vinsuree_data_all.ToList());
         }
 
+        // GET: Admin page
         public ActionResult Admin()
         {
             return View();
         }
 
+        // GET: Create page
         public ActionResult Create()
         {
-            _data.DataInsert(_db, _vdata);
             return View();
         }
+        #endregion
 
+        #region POST_actions
+        // POST: create db record
+        [HttpPost]
+        public ActionResult Create(vinsuree_data_all rec)
+        {
+            bool pass = _data.DataInsert(_db, rec);
+            if (pass) { return View(); }
+            else { return View("Error"); }
+        }
+
+        // POST: update db record
+        [HttpPost]
         public ActionResult Edit(int key)
         {
             // narrow to edit record
@@ -45,7 +60,9 @@ namespace CarInsurance_WebApp.Controllers
 
             return View(edit);
         }
+        #endregion
 
+        #region RESULT_actions
         public ActionResult Success()
         {
             return View(_db.vinsuree_data_all.OrderByDescending(x => x.curr_quote).Take(1).ToList());

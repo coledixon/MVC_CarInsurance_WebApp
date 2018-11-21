@@ -155,6 +155,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\StateCodeArray.cs" />
     <Compile Include="Controllers\WebAppDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WebAppExtController.cs" />
@@ -202,6 +203,7 @@
       <DependentUpon>db_insurance.mdf</DependentUpon>
     </Content>
     <Content Include="App_Data\scripts\schema_tables.sql" />
+    <Content Include="App_Data\scripts\schema_triggers.sql" />
     <Content Include="App_Data\scripts\schema_views.sql" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
