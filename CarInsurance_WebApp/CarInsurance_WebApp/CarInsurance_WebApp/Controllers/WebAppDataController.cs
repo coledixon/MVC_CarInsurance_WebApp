@@ -10,15 +10,25 @@ namespace CarInsurance_WebApp.Controllers
 {
     public class WebAppDataController : Controller
     {
-        // instantiate controller(s)
-        WebAppExtController ext = new WebAppExtController();
+        static WebAppExtController ext;
+        static car_main _car;
+        static insuree_main _main;
+        static insuree_info _info;
+        static insuree_hist _hist;
+        static insuree_quote _quote;
 
-        // instantiate model(s)
-        car_main _car = new car_main();
-        insuree_main _main = new insuree_main();
-        insuree_info _info = new insuree_info();
-        insuree_hist _hist = new insuree_hist();
-        insuree_quote _quote = new insuree_quote();
+        static WebAppDataController()
+        {
+            // instantiate controller(s)
+            ext = new WebAppExtController();
+
+            // instantiate model(s)
+            _car = new car_main();
+            _main = new insuree_main();
+            _info = new insuree_info();
+            _hist = new insuree_hist();
+            _quote = new insuree_quote();
+        }
 
         #region GET_select
         [HttpGet]
@@ -111,10 +121,7 @@ namespace CarInsurance_WebApp.Controllers
                 _quote.curr_quote = data.curr_quote = ext.CalcQuote(data);
                 // WIP _quote.prev_quote = data.prev_quote;
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
         private void SetTableValHelper(db_insuranceEntities db)
@@ -127,10 +134,7 @@ namespace CarInsurance_WebApp.Controllers
                 db.insuree_hist.Add(_hist);
                 db.insuree_quote.Add(_quote);
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
         }
         #endregion
     }

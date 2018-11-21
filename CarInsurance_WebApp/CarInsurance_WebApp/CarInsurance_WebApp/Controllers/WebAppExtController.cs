@@ -37,7 +37,6 @@ namespace CarInsurance_WebApp.Controllers
         public string ValidateParseStateCode(string state)
         {
             List<US_State> _states;
-
             _states = StateCodeArray.States().ToList();
 
             if (state.Length > 2)

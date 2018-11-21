@@ -10,13 +10,21 @@ namespace CarInsurance_WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        // instantiate data objects 
-        public static db_insuranceEntities _db = new db_insuranceEntities();
-        public vinsuree_data_all _vdata = new vinsuree_data_all();
+        static WebAppDataController _data;
+        static WebAppExtController _ext;
+        static db_insuranceEntities _db;
+        static vinsuree_data_all _vdata;
 
-        // instantiate controller(s)
-        WebAppDataController _data = new WebAppDataController();
-        WebAppExtController _ext = new WebAppExtController();
+        static HomeController()
+        {
+            // instantiate data objects 
+            _db = new db_insuranceEntities();
+            _vdata = new vinsuree_data_all();
+
+            // instantiate controller(s)
+            _data = new WebAppDataController();
+            _ext = new WebAppExtController();
+        }
 
         #region GET_actions
         // GET : Index page
