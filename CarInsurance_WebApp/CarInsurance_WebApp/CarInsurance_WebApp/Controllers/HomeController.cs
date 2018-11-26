@@ -52,9 +52,15 @@ namespace CarInsurance_WebApp.Controllers
         [HttpPost]
         public ActionResult Create(vinsuree_data_all rec)
         {
-            bool pass = _data.DataInsert(_db, rec);
-            if (pass) { return View(); }
-            else { return View("Error"); }
+            bool pass;
+
+            pass = _ext.CheckFieldVals(rec); // validate req fields are populated
+            if (!pass) { ViewBag.ErrorMessage = "All fields required for record creation."; return View("Error"); }
+
+            pass = _data.DataInsert(_db, rec); // insert record to db
+            if (!pass) { ViewBag.ErrorMessage = "Error on record creation at WebAppDataController.DataInsert()"; return View("Error"); }
+
+            return View();
         }
 
         // POST: update db record

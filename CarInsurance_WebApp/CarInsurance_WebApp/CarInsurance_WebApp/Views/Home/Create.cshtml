@@ -82,11 +82,18 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.dui, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.dui, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Enter Yes or No" } })
-            @Html.ValidationMessageFor(model => model.dui, "", new { @class = "text-danger" })
-        </div>
+        <form action="#">
+            <div class="col-md-10">
+                <p>
+                    <label>
+                        @Html.RadioButtonFor(model => model.dui, "YES", htmlAttributes: new { @class = "with-gap" })
+                        @Html.RadioButtonFor(model => model.dui, "NO", htmlAttributes: new { @class = "with-gap" })
+                    </label>
+                </p>
+                @*@Html.EditorFor(model => model.dui, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Enter Yes or No" } })*@
+                @Html.ValidationMessageFor(model => model.dui, "", new { @class = "text-danger" })
+            </div>
+        </form>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.coverage_type, htmlAttributes: new { @class = "control-label col-md-2" })

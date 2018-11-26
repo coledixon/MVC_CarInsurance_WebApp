@@ -2,6 +2,7 @@
 using CarInsurance_WebApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -58,7 +59,7 @@ namespace CarInsurance_WebApp.Controllers
             SetTableValHelper(db);
 
             try { db.SaveChanges(); }
-            catch (Exception ex) { throw new Exception(ex.Message); }
+            catch (DbEntityValidationException ex) { throw new Exception(ex.Message); }
 
             return res;
         }
@@ -106,6 +107,7 @@ namespace CarInsurance_WebApp.Controllers
                 // insuree_main
                 _main.first_name = data.first_name;
                 _main.last_name = data.last_name;
+                _main.create_date = DateTime.Now;
 
                 // insuree_info
                 _info.email = data.email;
@@ -118,6 +120,7 @@ namespace CarInsurance_WebApp.Controllers
                 _hist.tickets = data.tickets.GetValueOrDefault();
 
                 // insuree_quote
+                _quote.coverage_type = data.coverage_type;
                 _quote.curr_quote = data.curr_quote = ext.CalcQuote(data);
                 // WIP _quote.prev_quote = data.prev_quote;
             }

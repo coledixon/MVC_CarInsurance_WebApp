@@ -3,6 +3,7 @@ using CarInsurance_WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -57,6 +58,23 @@ namespace CarInsurance_WebApp.Controllers
             }
 
             return state;
+        }
+
+        public bool CheckFieldVals(vinsuree_data_all data)
+        {
+            bool res = true; // default to valid
+            PropertyInfo[] props = typeof(vinsuree_data_all).GetProperties();
+
+            foreach (PropertyInfo prop in props)
+            {
+                object value = prop.GetValue(data, null);
+                if (value == null)
+                {
+                    return res = false;
+                }
+            }
+
+            return res;
         }
     }
 }
