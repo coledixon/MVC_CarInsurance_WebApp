@@ -60,12 +60,17 @@ namespace CarInsurance_WebApp.Controllers
             return state;
         }
 
+        // validate cshtml fields are populated
         public bool CheckFieldVals(vinsuree_data_all data)
         {
             bool res = true; // default to valid
             PropertyInfo[] props = typeof(vinsuree_data_all).GetProperties();
 
-            foreach (PropertyInfo prop in props)
+            var _props = new List<PropertyInfo>(props);
+            _props.RemoveRange(13,2); // remove quote vals
+            _props.ToArray();
+
+            foreach (PropertyInfo prop in _props)
             {
                 object value = prop.GetValue(data, null);
                 if (value == null)
