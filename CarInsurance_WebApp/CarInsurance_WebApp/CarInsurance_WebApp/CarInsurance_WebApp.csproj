@@ -162,39 +162,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\car_main.cs">
-      <DependentUpon>WebApp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\insuree_hist.cs">
-      <DependentUpon>WebApp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\insuree_info.cs">
-      <DependentUpon>WebApp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\insuree_main.cs">
-      <DependentUpon>WebApp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\insuree_quote.cs">
-      <DependentUpon>WebApp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vinsuree_data_all.cs">
-      <DependentUpon>WebApp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WebApp.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebApp.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WebApp.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebApp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WebApp.Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebApp.Model.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -218,27 +185,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\WebApp.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WebApp.Context.cs</LastGenOutput>
-      <DependentUpon>WebApp.Model.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\WebApp.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WebApp.Model.edmx</DependentUpon>
-      <LastGenOutput>WebApp.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\WebApp.Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WebApp.Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\WebApp.Model.edmx.diagram">
-      <DependentUpon>WebApp.Model.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -270,6 +220,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="Views\WebAppData\" />
     <Folder Include="Views\WebAppExt\" />
     <Folder Include="Views\WebAppHome\" />
