@@ -115,8 +115,8 @@ BEGIN
 	CREATE TABLE insuree_hist (
 			[hist_key] int IDENTITY(1,1),
 			[insuree_key] int not null,
-			[dui] int null,
-			[tickets] int null,
+			[dui] varchar(5) null,
+			[tickets] varchar(1) null,
 		PRIMARY KEY NONCLUSTERED
 		(
 			[hist_key] ASC

@@ -20,12 +20,14 @@
       <PropertyRef Name="car_year" />
       <PropertyRef Name="car_make" />
       <PropertyRef Name="car_model" />
+      <PropertyRef Name="car_key" />
     </Key>
     <Property Name="insuree_key" Type="Int32" Nullable="false" />
     <Property Name="car_year" Type="Int32" Nullable="false" />
     <Property Name="car_make" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="car_model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="insuree_main" Relationship="Self.fk_carMain" FromRole="car_main" ToRole="insuree_main" />
+    <Property Name="car_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="insuree_hist">
     <Key>
@@ -43,6 +45,7 @@
       <PropertyRef Name="dob" />
       <PropertyRef Name="state" />
       <PropertyRef Name="zip" />
+      <PropertyRef Name="info_key" />
     </Key>
     <Property Name="insuree_key" Type="Int32" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
@@ -50,17 +53,20 @@
     <Property Name="state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="zip" Type="Int32" Nullable="false" />
     <NavigationProperty Name="insuree_main" Relationship="Self.fk_addressContact" FromRole="insuree_info" ToRole="insuree_main" />
+    <Property Name="info_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="insuree_quote">
     <Key>
       <PropertyRef Name="insuree_key" />
       <PropertyRef Name="coverage_type" />
+      <PropertyRef Name="quote_key" />
     </Key>
     <Property Name="insuree_key" Type="Int32" Nullable="false" />
     <Property Name="coverage_type" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="curr_quote" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="prev_quote" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="insuree_main" Relationship="Self.fk_insureeQuote" FromRole="insuree_quote" ToRole="insuree_main" />
+    <Property Name="quote_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="vinsuree_data_all">
     <Key>

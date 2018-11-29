@@ -116,7 +116,7 @@ namespace CarInsurance_WebApp.Controllers
                 _info.zip = data.zip.GetValueOrDefault();
 
                 // insuree_hist
-                _hist.dui = data.dui.GetValueOrDefault();
+                _hist.dui = data.dui;
                 _hist.tickets = data.tickets.GetValueOrDefault();
 
                 // insuree_quote

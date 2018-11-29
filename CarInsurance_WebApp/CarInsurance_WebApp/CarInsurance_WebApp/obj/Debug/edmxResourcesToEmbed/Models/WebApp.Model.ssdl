@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="WebApp.Insurance.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Errors Found During Generation:
-warning 6002: The table/view '25B40CCC1C4CF45B9B2F7BC035AF536A_CE_WEBAPP\CARINSURANCE_WEBAPP\CARINSURANCE_WEBAPP\CARINSURANCE_WEBAPP\APP_DATA\DB_INSURANCE.MDF.dbo.car_main' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="car_main">
     <Key>
-      <PropertyRef Name="insuree_key" />
-      <PropertyRef Name="car_year" />
-      <PropertyRef Name="car_make" />
-      <PropertyRef Name="car_model" />
+      <PropertyRef Name="car_key" />
     </Key>
+    <Property Name="car_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="insuree_key" Type="int" Nullable="false" />
     <Property Name="car_year" Type="int" Nullable="false" />
     <Property Name="car_make" Type="varchar" MaxLength="50" Nullable="false" />
@@ -24,16 +20,11 @@ warning 6002: The table/view '25B40CCC1C4CF45B9B2F7BC035AF536A_CE_WEBAPP\CARINSU
     <Property Name="dui" Type="int" />
     <Property Name="tickets" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view '25B40CCC1C4CF45B9B2F7BC035AF536A_CE_WEBAPP\CARINSURANCE_WEBAPP\CARINSURANCE_WEBAPP\CARINSURANCE_WEBAPP\APP_DATA\DB_INSURANCE.MDF.dbo.insuree_info' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="insuree_info">
     <Key>
-      <PropertyRef Name="insuree_key" />
-      <PropertyRef Name="email" />
-      <PropertyRef Name="dob" />
-      <PropertyRef Name="state" />
-      <PropertyRef Name="zip" />
+      <PropertyRef Name="info_key" />
     </Key>
+    <Property Name="info_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="insuree_key" Type="int" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="dob" Type="datetime" Nullable="false" />
@@ -50,13 +41,11 @@ warning 6002: The table/view '25B40CCC1C4CF45B9B2F7BC035AF536A_CE_WEBAPP\CARINSU
     <Property Name="create_date" Type="datetime" Nullable="false" />
     <Property Name="upd_date" Type="datetime" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view '25B40CCC1C4CF45B9B2F7BC035AF536A_CE_WEBAPP\CARINSURANCE_WEBAPP\CARINSURANCE_WEBAPP\CARINSURANCE_WEBAPP\APP_DATA\DB_INSURANCE.MDF.dbo.insuree_quote' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="insuree_quote">
     <Key>
-      <PropertyRef Name="insuree_key" />
-      <PropertyRef Name="coverage_type" />
+      <PropertyRef Name="quote_key" />
     </Key>
+    <Property Name="quote_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="insuree_key" Type="int" Nullable="false" />
     <Property Name="coverage_type" Type="varchar" MaxLength="12" Nullable="false" />
     <Property Name="curr_quote" Type="varchar" MaxLength="10" />
@@ -110,18 +99,6 @@ warning 6002: The table/view '25B40CCC1C4CF45B9B2F7BC035AF536A_CE_WEBAPP\CARINSU
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_insureeHist">
-    <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
-    <End Role="insuree_hist" Type="Self.insuree_hist" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="insuree_main">
-        <PropertyRef Name="insuree_key" />
-      </Principal>
-      <Dependent Role="insuree_hist">
-        <PropertyRef Name="insuree_key" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="fk_insureeQuote">
     <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
     <End Role="insuree_quote" Type="Self.insuree_quote" Multiplicity="*" />
@@ -135,38 +112,16 @@ warning 6002: The table/view '25B40CCC1C4CF45B9B2F7BC035AF536A_CE_WEBAPP\CARINSU
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="WebAppInsuranceModelStoreContainer">
+    <EntitySet Name="car_main" EntityType="Self.car_main" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="insuree_info" EntityType="Self.insuree_info" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="insuree_main" EntityType="Self.insuree_main" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="car_main" EntityType="Self.car_main" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [car_main].[insuree_key] AS [insuree_key], 
-    [car_main].[car_year] AS [car_year], 
-    [car_main].[car_make] AS [car_make], 
-    [car_main].[car_model] AS [car_model]
-    FROM [dbo].[car_main] AS [car_main]</DefiningQuery>
-    </EntitySet>
+    <EntitySet Name="insuree_quote" EntityType="Self.insuree_quote" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="insuree_hist" EntityType="Self.insuree_hist" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [insuree_hist].[insuree_key] AS [insuree_key], 
     [insuree_hist].[dui] AS [dui], 
     [insuree_hist].[tickets] AS [tickets]
     FROM [dbo].[insuree_hist] AS [insuree_hist]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="insuree_info" EntityType="Self.insuree_info" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [insuree_info].[insuree_key] AS [insuree_key], 
-    [insuree_info].[email] AS [email], 
-    [insuree_info].[dob] AS [dob], 
-    [insuree_info].[state] AS [state], 
-    [insuree_info].[zip] AS [zip]
-    FROM [dbo].[insuree_info] AS [insuree_info]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="insuree_quote" EntityType="Self.insuree_quote" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [insuree_quote].[insuree_key] AS [insuree_key], 
-    [insuree_quote].[coverage_type] AS [coverage_type], 
-    [insuree_quote].[curr_quote] AS [curr_quote], 
-    [insuree_quote].[prev_quote] AS [prev_quote]
-    FROM [dbo].[insuree_quote] AS [insuree_quote]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="vinsuree_data_all" EntityType="Self.vinsuree_data_all" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -194,10 +149,6 @@ warning 6002: The table/view '25B40CCC1C4CF45B9B2F7BC035AF536A_CE_WEBAPP\CARINSU
     <AssociationSet Name="fk_carMain" Association="Self.fk_carMain">
       <End Role="insuree_main" EntitySet="insuree_main" />
       <End Role="car_main" EntitySet="car_main" />
-    </AssociationSet>
-    <AssociationSet Name="fk_insureeHist" Association="Self.fk_insureeHist">
-      <End Role="insuree_main" EntitySet="insuree_main" />
-      <End Role="insuree_hist" EntitySet="insuree_hist" />
     </AssociationSet>
     <AssociationSet Name="fk_insureeQuote" Association="Self.fk_insureeQuote">
       <End Role="insuree_main" EntitySet="insuree_main" />
