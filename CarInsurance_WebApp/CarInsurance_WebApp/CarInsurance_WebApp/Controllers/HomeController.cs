@@ -12,13 +12,13 @@ namespace CarInsurance_WebApp.Controllers
     {
         static WebAppDataController _data;
         static WebAppExtController _ext;
-        static db_insuranceEntities _db;
+        static db_insuranceEntities_  _db;
         static vinsuree_data_all _vdata;
 
         static HomeController()
         {
             // instantiate data objects 
-            _db = new db_insuranceEntities();
+            _db = new db_insuranceEntities_();
             _vdata = new vinsuree_data_all();
 
             // instantiate controller(s)
@@ -43,6 +43,7 @@ namespace CarInsurance_WebApp.Controllers
         // GET: Create page
         public ActionResult Create()
         {
+            ViewBag.Dui = _ext.DUI();
             return View();
         }
         #endregion

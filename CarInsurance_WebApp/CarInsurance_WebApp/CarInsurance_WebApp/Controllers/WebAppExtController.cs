@@ -27,8 +27,8 @@ namespace CarInsurance_WebApp.Controllers
             quote = (data.car_make.ToLower() == "porsche" && data.car_model.Contains("carrera")) ? quote + 25.00M : quote;
             
             // risk logic
-            quote = (data.tickets > 4) ? quote + (data.tickets * 10).Value : quote;
-            quote = (data.dui > 0) ? quote + (Decimal.Multiply(quote, .25M)): quote;
+            //TO DO quote = (data.tickets > 4) ? quote + (data.tickets * 10).Value : quote;
+            //TO DO quote = (data.dui > 0) ? quote + (Decimal.Multiply(quote, .25M)): quote;
             quote = (data.coverage_type.ToLower() == "full") ? quote + (Decimal.Multiply(quote, .25M)) : quote;
 
             return quote.ToString();
@@ -81,5 +81,29 @@ namespace CarInsurance_WebApp.Controllers
 
             return res;
         }
+
+        // define lists for cshtml dropdowns
+        #region dropdown
+        public List<string> DUI()
+        {
+            var dui = new List<string>();
+
+            dui.Add("true");
+            dui.Add("false");
+
+            return dui;
+        }
+
+        public List<int> TICKETS()
+        {
+            var tix = new List<int>();
+
+            tix.Add(0); tix.Add(1);
+            tix.Add(2); tix.Add(3);
+            tix.Add(4); tix.Add(5);
+
+            return tix;
+        }
+        #endregion
     }
 }

@@ -162,6 +162,42 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\car_main.cs">
+      <DependentUpon>db_insurance.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\db_insurance.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>db_insurance.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\db_insurance.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>db_insurance.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\db_insurance.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>db_insurance.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\insuree_hist.cs">
+      <DependentUpon>db_insurance.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\insuree_info.cs">
+      <DependentUpon>db_insurance.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\insuree_main.cs">
+      <DependentUpon>db_insurance.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\insuree_quote.cs">
+      <DependentUpon>db_insurance.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spGetInsureeKey_Result.cs">
+      <DependentUpon>db_insurance.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vinsuree_data_all.cs">
+      <DependentUpon>db_insurance.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,10 +221,27 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\db_insurance.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>db_insurance.edmx</DependentUpon>
+      <LastGenOutput>db_insurance.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\db_insurance.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>db_insurance.edmx</DependentUpon>
+      <LastGenOutput>db_insurance.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\db_insurance.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>db_insurance.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\db_insurance.edmx.diagram">
+      <DependentUpon>db_insurance.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -220,7 +273,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Views\WebAppData\" />
     <Folder Include="Views\WebAppExt\" />
     <Folder Include="Views\WebAppHome\" />

@@ -33,7 +33,7 @@ namespace CarInsurance_WebApp.Controllers
 
         #region GET_select
         [HttpGet]
-        public bool DataSelect(db_insuranceEntities db, vinsuree_data_all data) // load all applicable records
+        public bool DataSelect(db_insuranceEntities_ db, vinsuree_data_all data) // load all applicable records
         {
             bool res = false; // default to fail
 
@@ -41,7 +41,7 @@ namespace CarInsurance_WebApp.Controllers
         }
 
         [HttpGet]
-        public bool DataSelect(db_insuranceEntities db, vinsuree_data_all data, int key) // single record select
+        public bool DataSelect(db_insuranceEntities_ db, vinsuree_data_all data, int key) // single record select
         {
             bool res = false; // default to fail
              
@@ -51,7 +51,7 @@ namespace CarInsurance_WebApp.Controllers
 
         #region POST_insert/update
         [HttpPost]
-        public bool DataInsert(db_insuranceEntities db, vinsuree_data_all data)
+        public bool DataInsert(db_insuranceEntities_ db, vinsuree_data_all data)
         {
             bool res = true; // default to pass
 
@@ -65,7 +65,7 @@ namespace CarInsurance_WebApp.Controllers
         }
 
         [HttpPost]
-        public bool DataInsert(db_insuranceEntities db)
+        public bool DataInsert(db_insuranceEntities_ db)
         {
             bool res = false; // default to fail
             
@@ -73,7 +73,7 @@ namespace CarInsurance_WebApp.Controllers
         }
 
         [HttpPost]
-        public bool DataUpdate(db_insuranceEntities db, [Bind(Exclude = "insuree_key")] vinsuree_data_all data, int key)
+        public bool DataUpdate(db_insuranceEntities_ db, [Bind(Exclude = "insuree_key")] vinsuree_data_all data, int key)
         {
             bool res = false; // default to fail
 
@@ -85,7 +85,7 @@ namespace CarInsurance_WebApp.Controllers
 
         #region DEL_delete
         [HttpDelete]
-        public bool DataDelete(db_insuranceEntities db, vinsuree_data_all data, int key)
+        public bool DataDelete(db_insuranceEntities_ db, vinsuree_data_all data, int key)
         {
             bool res = false; // default to fail
 
@@ -117,7 +117,7 @@ namespace CarInsurance_WebApp.Controllers
 
                 // insuree_hist
                 _hist.dui = data.dui;
-                _hist.tickets = data.tickets.GetValueOrDefault();
+                // TO DO _hist.tickets = data.tickets.GetValueOrDefault();
 
                 // insuree_quote
                 _quote.coverage_type = data.coverage_type;
@@ -127,7 +127,7 @@ namespace CarInsurance_WebApp.Controllers
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
-        private void SetTableValHelper(db_insuranceEntities db)
+        private void SetTableValHelper(db_insuranceEntities_ db)
         {
             try
             {
