@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_insuranceModelStoreContainer" CdmEntityContainer="db_insuranceEntities_">
+    <EntitySetMapping Name="car_main">
+      <EntityTypeMapping TypeName="db_insuranceModel.car_main">
+        <MappingFragment StoreEntitySet="car_main">
+          <ScalarProperty Name="car_key" ColumnName="car_key" />
+          <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+          <ScalarProperty Name="car_year" ColumnName="car_year" />
+          <ScalarProperty Name="car_make" ColumnName="car_make" />
+          <ScalarProperty Name="car_model" ColumnName="car_model" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insuree_hist">
+      <EntityTypeMapping TypeName="db_insuranceModel.insuree_hist">
+        <MappingFragment StoreEntitySet="insuree_hist">
+          <ScalarProperty Name="hist_key" ColumnName="hist_key" />
+          <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+          <ScalarProperty Name="dui" ColumnName="dui" />
+          <ScalarProperty Name="tickets" ColumnName="tickets" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insuree_info">
+      <EntityTypeMapping TypeName="db_insuranceModel.insuree_info">
+        <MappingFragment StoreEntitySet="insuree_info">
+          <ScalarProperty Name="info_key" ColumnName="info_key" />
+          <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="zip" ColumnName="zip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insuree_main">
+      <EntityTypeMapping TypeName="db_insuranceModel.insuree_main">
+        <MappingFragment StoreEntitySet="insuree_main">
+          <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="upd_date" ColumnName="upd_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insuree_quote">
+      <EntityTypeMapping TypeName="db_insuranceModel.insuree_quote">
+        <MappingFragment StoreEntitySet="insuree_quote">
+          <ScalarProperty Name="quote_key" ColumnName="quote_key" />
+          <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+          <ScalarProperty Name="coverage_type" ColumnName="coverage_type" />
+          <ScalarProperty Name="curr_quote" ColumnName="curr_quote" />
+          <ScalarProperty Name="prev_quote" ColumnName="prev_quote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vinsuree_data_all">
+      <EntityTypeMapping TypeName="db_insuranceModel.vinsuree_data_all">
+        <MappingFragment StoreEntitySet="vinsuree_data_all">
+          <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="zip" ColumnName="zip" />
+          <ScalarProperty Name="car_year" ColumnName="car_year" />
+          <ScalarProperty Name="car_make" ColumnName="car_make" />
+          <ScalarProperty Name="car_model" ColumnName="car_model" />
+          <ScalarProperty Name="coverage_type" ColumnName="coverage_type" />
+          <ScalarProperty Name="dui" ColumnName="dui" />
+          <ScalarProperty Name="tickets" ColumnName="tickets" />
+          <ScalarProperty Name="curr_quote" ColumnName="curr_quote" />
+          <ScalarProperty Name="prev_quote" ColumnName="prev_quote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spGetInsureeKey" FunctionName="db_insuranceModel.Store.spGetInsureeKey">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="db_insuranceModel.spGetInsureeKey_Result">
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+          <ScalarProperty Name="retval" ColumnName="retval" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
