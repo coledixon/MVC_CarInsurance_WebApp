@@ -43,7 +43,11 @@ namespace CarInsurance_WebApp.Controllers
         // GET: Create page
         public ActionResult Create()
         {
-            ViewBag.Dui = _ext.DUI();
+            List<string> dui = new List<string>();
+            dui = _ext.DUI();
+
+            ViewBag.Dui = new SelectList(dui, "dui", "dui2");
+
             return View();
         }
         #endregion
