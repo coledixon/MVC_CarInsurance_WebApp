@@ -92,3 +92,4 @@ C:\Users\Cole Dixon\PROJECTS\MVC_CarInsurance_WebApp\CarInsurance_WebApp\CarInsu
 C:\Users\Cole Dixon\PROJECTS\MVC_CarInsurance_WebApp\CarInsurance_WebApp\CarInsurance_WebApp\CarInsurance_WebApp\obj\Debug\CarInsurance_WebApp.csproj.CopyComplete
 C:\Users\Cole Dixon\PROJECTS\MVC_CarInsurance_WebApp\CarInsurance_WebApp\CarInsurance_WebApp\CarInsurance_WebApp\obj\Debug\CarInsurance_WebApp.dll
 C:\Users\Cole Dixon\PROJECTS\MVC_CarInsurance_WebApp\CarInsurance_WebApp\CarInsurance_WebApp\CarInsurance_WebApp\obj\Debug\CarInsurance_WebApp.pdb
+C:\Users\Cole Dixon\projects\MVC_CarInsurance_WebApp\CarInsurance_WebApp\CarInsurance_WebApp\CarInsurance_WebApp\obj\Debug\CarInsurance_WebApp.csprojAssemblyReference.cache
