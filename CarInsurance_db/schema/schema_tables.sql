@@ -13,12 +13,28 @@ GO
 
 /* --- TABLES --- */
 -- each table reqs primary key for Entity Framework
+IF OBJECT_ID('dbo.login_main') is null
+BEGIN
+	--master login table
+	CREATE TABLE login_main (
+			[login_user_key] int IDENTITY(1,1),
+			[username] varchar(25) not null,
+			[password] varchar(10) not null
+		PRIMARY KEY NONCLUSTERED
+		(
+			[login_user_key]
+		) ON [PRIMARY]
+	)
+END
+
+GO
 
 IF OBJECT_ID('dbo.insuree_main') is null
 BEGIN
 	-- master insuree table
 	CREATE TABLE insuree_main (
 			[insuree_key] int IDENTITY(1,1),
+			[login_user_key] int not null,
 			[first_name] varchar(50) not null,
 			[last_name] varchar(50) not null,
 			[create_date] datetime not null,
@@ -26,7 +42,9 @@ BEGIN
 		PRIMARY KEY NONCLUSTERED 
 		(
 			[insuree_key] ASC
-		) ON [PRIMARY]
+		) ON [PRIMARY],
+
+		CONSTRAINT fk_loginUserKey FOREIGN KEY (login_user_key) REFERENCES login_main(login_user_key)
 	)
 
 		ALTER TABLE insuree_main
