@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CarInsurance_WebApp</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/Content/css/materialize.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/js/materialize.min.js"></script>
+</head>
+<body class="grey darken-2">
+    <nav class="indigo">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo right" style="font-family:Oswald sans, sans-serif;">
+                <i class="material-icons">directions_car</i>CHECK<b><font color="black">MATE</font></b>! AUTO</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li>@Html.ActionLink("Index", "Index", new { id = "" }, new { @class = "waves-effect waves-light btn-small" })</li>
+                <li>@Html.ActionLink("Admin", "Admin", new { id = "" }, new { @class = "waves-effect waves-light btn-small" })</li>
+                <!--<li>@Html.ActionLink("New Record", "Create", new { id = "" }, new { @class = "waves-effect waves-light btn-small" })</li>-->
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

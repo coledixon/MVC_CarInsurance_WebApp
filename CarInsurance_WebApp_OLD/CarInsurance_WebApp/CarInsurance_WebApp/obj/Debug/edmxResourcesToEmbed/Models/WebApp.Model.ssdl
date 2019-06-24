@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WebApp.Insurance.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="car_main">
+    <Key>
+      <PropertyRef Name="car_key" />
+    </Key>
+    <Property Name="car_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="insuree_key" Type="int" Nullable="false" />
+    <Property Name="car_year" Type="int" Nullable="false" />
+    <Property Name="car_make" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="car_model" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view '25B40CCC1C4CF45B9B2F7BC035AF536A_CE_WEBAPP\CARINSURANCE_WEBAPP\CARINSURANCE_WEBAPP\CARINSURANCE_WEBAPP\APP_DATA\DB_INSURANCE.MDF.dbo.insuree_hist' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="insuree_hist">
+    <Key>
+      <PropertyRef Name="insuree_key" />
+    </Key>
+    <Property Name="insuree_key" Type="int" Nullable="false" />
+    <Property Name="dui" Type="int" />
+    <Property Name="tickets" Type="int" />
+  </EntityType>
+  <EntityType Name="insuree_info">
+    <Key>
+      <PropertyRef Name="info_key" />
+    </Key>
+    <Property Name="info_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="insuree_key" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="dob" Type="datetime" Nullable="false" />
+    <Property Name="state" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="zip" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="insuree_main">
+    <Key>
+      <PropertyRef Name="insuree_key" />
+    </Key>
+    <Property Name="insuree_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="first_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="upd_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="insuree_quote">
+    <Key>
+      <PropertyRef Name="quote_key" />
+    </Key>
+    <Property Name="quote_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="insuree_key" Type="int" Nullable="false" />
+    <Property Name="coverage_type" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="curr_quote" Type="varchar" MaxLength="10" />
+    <Property Name="prev_quote" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view '25B40CCC1C4CF45B9B2F7BC035AF536A_CE_WEBAPP\CARINSURANCE_WEBAPP\CARINSURANCE_WEBAPP\CARINSURANCE_WEBAPP\APP_DATA\DB_INSURANCE.MDF.dbo.vinsuree_data_all' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vinsuree_data_all">
+    <Key>
+      <PropertyRef Name="insuree_key" />
+      <PropertyRef Name="first_name" />
+      <PropertyRef Name="last_name" />
+    </Key>
+    <Property Name="insuree_key" Type="int" Nullable="false" />
+    <Property Name="first_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="200" />
+    <Property Name="dob" Type="datetime" />
+    <Property Name="state" Type="varchar" MaxLength="2" />
+    <Property Name="zip" Type="int" />
+    <Property Name="car_year" Type="int" />
+    <Property Name="car_make" Type="varchar" MaxLength="50" />
+    <Property Name="car_model" Type="varchar" MaxLength="50" />
+    <Property Name="coverage_type" Type="varchar" MaxLength="12" />
+    <Property Name="dui" Type="int" />
+    <Property Name="tickets" Type="int" />
+    <Property Name="curr_quote" Type="varchar" MaxLength="10" />
+    <Property Name="prev_quote" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="fk_addressContact">
+    <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
+    <End Role="insuree_info" Type="Self.insuree_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insuree_main">
+        <PropertyRef Name="insuree_key" />
+      </Principal>
+      <Dependent Role="insuree_info">
+        <PropertyRef Name="insuree_key" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_carMain">
+    <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
+    <End Role="car_main" Type="Self.car_main" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insuree_main">
+        <PropertyRef Name="insuree_key" />
+      </Principal>
+      <Dependent Role="car_main">
+        <PropertyRef Name="insuree_key" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_insureeQuote">
+    <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
+    <End Role="insuree_quote" Type="Self.insuree_quote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insuree_main">
+        <PropertyRef Name="insuree_key" />
+      </Principal>
+      <Dependent Role="insuree_quote">
+        <PropertyRef Name="insuree_key" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WebAppInsuranceModelStoreContainer">
+    <EntitySet Name="car_main" EntityType="Self.car_main" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="insuree_info" EntityType="Self.insuree_info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="insuree_main" EntityType="Self.insuree_main" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="insuree_quote" EntityType="Self.insuree_quote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="insuree_hist" EntityType="Self.insuree_hist" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [insuree_hist].[insuree_key] AS [insuree_key], 
+    [insuree_hist].[dui] AS [dui], 
+    [insuree_hist].[tickets] AS [tickets]
+    FROM [dbo].[insuree_hist] AS [insuree_hist]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vinsuree_data_all" EntityType="Self.vinsuree_data_all" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vinsuree_data_all].[insuree_key] AS [insuree_key], 
+    [vinsuree_data_all].[first_name] AS [first_name], 
+    [vinsuree_data_all].[last_name] AS [last_name], 
+    [vinsuree_data_all].[email] AS [email], 
+    [vinsuree_data_all].[dob] AS [dob], 
+    [vinsuree_data_all].[state] AS [state], 
+    [vinsuree_data_all].[zip] AS [zip], 
+    [vinsuree_data_all].[car_year] AS [car_year], 
+    [vinsuree_data_all].[car_make] AS [car_make], 
+    [vinsuree_data_all].[car_model] AS [car_model], 
+    [vinsuree_data_all].[coverage_type] AS [coverage_type], 
+    [vinsuree_data_all].[dui] AS [dui], 
+    [vinsuree_data_all].[tickets] AS [tickets], 
+    [vinsuree_data_all].[curr_quote] AS [curr_quote], 
+    [vinsuree_data_all].[prev_quote] AS [prev_quote]
+    FROM [dbo].[vinsuree_data_all] AS [vinsuree_data_all]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="fk_addressContact" Association="Self.fk_addressContact">
+      <End Role="insuree_main" EntitySet="insuree_main" />
+      <End Role="insuree_info" EntitySet="insuree_info" />
+    </AssociationSet>
+    <AssociationSet Name="fk_carMain" Association="Self.fk_carMain">
+      <End Role="insuree_main" EntitySet="insuree_main" />
+      <End Role="car_main" EntitySet="car_main" />
+    </AssociationSet>
+    <AssociationSet Name="fk_insureeQuote" Association="Self.fk_insureeQuote">
+      <End Role="insuree_main" EntitySet="insuree_main" />
+      <End Role="insuree_quote" EntitySet="insuree_quote" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
