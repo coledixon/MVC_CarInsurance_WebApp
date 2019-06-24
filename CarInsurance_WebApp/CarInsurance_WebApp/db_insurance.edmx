@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_insuranceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="car_main">
+          <Key>
+            <PropertyRef Name="car_key" />
+          </Key>
+          <Property Name="car_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="insuree_key" Type="int" Nullable="false" />
+          <Property Name="car_year" Type="int" Nullable="false" />
+          <Property Name="car_make" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="car_model" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="insuree_hist">
+          <Key>
+            <PropertyRef Name="hist_key" />
+          </Key>
+          <Property Name="hist_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="insuree_key" Type="int" Nullable="false" />
+          <Property Name="dui" Type="varchar" MaxLength="5" />
+          <Property Name="tickets" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="insuree_info">
+          <Key>
+            <PropertyRef Name="info_key" />
+          </Key>
+          <Property Name="info_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="insuree_key" Type="int" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="dob" Type="datetime" Nullable="false" />
+          <Property Name="state" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="zip" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="insuree_main">
+          <Key>
+            <PropertyRef Name="insuree_key" />
+          </Key>
+          <Property Name="insuree_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login_user_key" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="upd_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="insuree_quote">
+          <Key>
+            <PropertyRef Name="quote_key" />
+          </Key>
+          <Property Name="quote_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="insuree_key" Type="int" Nullable="false" />
+          <Property Name="coverage_type" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="curr_quote" Type="varchar" MaxLength="10" />
+          <Property Name="prev_quote" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="login_main">
+          <Key>
+            <PropertyRef Name="login_user_key" />
+          </Key>
+          <Property Name="login_user_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'db_insurance.dbo.vinsuree_data_all' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vinsuree_data_all">
+          <Key>
+            <PropertyRef Name="insuree_key" />
+            <PropertyRef Name="first_name" />
+            <PropertyRef Name="last_name" />
+          </Key>
+          <Property Name="insuree_key" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="200" />
+          <Property Name="dob" Type="datetime" />
+          <Property Name="state" Type="varchar" MaxLength="2" />
+          <Property Name="zip" Type="int" />
+          <Property Name="car_year" Type="int" />
+          <Property Name="car_make" Type="varchar" MaxLength="50" />
+          <Property Name="car_model" Type="varchar" MaxLength="50" />
+          <Property Name="coverage_type" Type="varchar" MaxLength="12" />
+          <Property Name="dui" Type="varchar" MaxLength="5" />
+          <Property Name="tickets" Type="varchar" MaxLength="1" />
+          <Property Name="curr_quote" Type="varchar" MaxLength="10" />
+          <Property Name="prev_quote" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'db_insurance.dbo.vlogin_user_all' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vlogin_user_all">
+          <Key>
+            <PropertyRef Name="login_user_key" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="password" />
+          </Key>
+          <Property Name="insuree_key" Type="int" />
+          <Property Name="login_user_key" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="50" />
+          <Property Name="last_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="fk_addressContact">
+          <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
+          <End Role="insuree_info" Type="Self.insuree_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insuree_main">
+              <PropertyRef Name="insuree_key" />
+            </Principal>
+            <Dependent Role="insuree_info">
+              <PropertyRef Name="insuree_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_carMain">
+          <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
+          <End Role="car_main" Type="Self.car_main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insuree_main">
+              <PropertyRef Name="insuree_key" />
+            </Principal>
+            <Dependent Role="car_main">
+              <PropertyRef Name="insuree_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_insureeHist">
+          <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
+          <End Role="insuree_hist" Type="Self.insuree_hist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insuree_main">
+              <PropertyRef Name="insuree_key" />
+            </Principal>
+            <Dependent Role="insuree_hist">
+              <PropertyRef Name="insuree_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_insureeQuote">
+          <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
+          <End Role="insuree_quote" Type="Self.insuree_quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insuree_main">
+              <PropertyRef Name="insuree_key" />
+            </Principal>
+            <Dependent Role="insuree_quote">
+              <PropertyRef Name="insuree_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_loginUserKey">
+          <End Role="login_main" Type="Self.login_main" Multiplicity="1" />
+          <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login_main">
+              <PropertyRef Name="login_user_key" />
+            </Principal>
+            <Dependent Role="insuree_main">
+              <PropertyRef Name="login_user_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spGetInsureeKey" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="insuree_key" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="db_insuranceModelStoreContainer">
+          <EntitySet Name="car_main" EntityType="Self.car_main" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="insuree_hist" EntityType="Self.insuree_hist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="insuree_info" EntityType="Self.insuree_info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="insuree_main" EntityType="Self.insuree_main" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="insuree_quote" EntityType="Self.insuree_quote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="login_main" EntityType="Self.login_main" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vinsuree_data_all" EntityType="Self.vinsuree_data_all" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vinsuree_data_all].[insuree_key] AS [insuree_key], 
+    [vinsuree_data_all].[first_name] AS [first_name], 
+    [vinsuree_data_all].[last_name] AS [last_name], 
+    [vinsuree_data_all].[email] AS [email], 
+    [vinsuree_data_all].[dob] AS [dob], 
+    [vinsuree_data_all].[state] AS [state], 
+    [vinsuree_data_all].[zip] AS [zip], 
+    [vinsuree_data_all].[car_year] AS [car_year], 
+    [vinsuree_data_all].[car_make] AS [car_make], 
+    [vinsuree_data_all].[car_model] AS [car_model], 
+    [vinsuree_data_all].[coverage_type] AS [coverage_type], 
+    [vinsuree_data_all].[dui] AS [dui], 
+    [vinsuree_data_all].[tickets] AS [tickets], 
+    [vinsuree_data_all].[curr_quote] AS [curr_quote], 
+    [vinsuree_data_all].[prev_quote] AS [prev_quote]
+    FROM [dbo].[vinsuree_data_all] AS [vinsuree_data_all]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vlogin_user_all" EntityType="Self.vlogin_user_all" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vlogin_user_all].[insuree_key] AS [insuree_key], 
+    [vlogin_user_all].[login_user_key] AS [login_user_key], 
+    [vlogin_user_all].[username] AS [username], 
+    [vlogin_user_all].[password] AS [password], 
+    [vlogin_user_all].[first_name] AS [first_name], 
+    [vlogin_user_all].[last_name] AS [last_name]
+    FROM [dbo].[vlogin_user_all] AS [vlogin_user_all]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_addressContact" Association="Self.fk_addressContact">
+            <End Role="insuree_main" EntitySet="insuree_main" />
+            <End Role="insuree_info" EntitySet="insuree_info" />
+          </AssociationSet>
+          <AssociationSet Name="fk_carMain" Association="Self.fk_carMain">
+            <End Role="insuree_main" EntitySet="insuree_main" />
+            <End Role="car_main" EntitySet="car_main" />
+          </AssociationSet>
+          <AssociationSet Name="fk_insureeHist" Association="Self.fk_insureeHist">
+            <End Role="insuree_main" EntitySet="insuree_main" />
+            <End Role="insuree_hist" EntitySet="insuree_hist" />
+          </AssociationSet>
+          <AssociationSet Name="fk_insureeQuote" Association="Self.fk_insureeQuote">
+            <End Role="insuree_main" EntitySet="insuree_main" />
+            <End Role="insuree_quote" EntitySet="insuree_quote" />
+          </AssociationSet>
+          <AssociationSet Name="fk_loginUserKey" Association="Self.fk_loginUserKey">
+            <End Role="login_main" EntitySet="login_main" />
+            <End Role="insuree_main" EntitySet="insuree_main" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_insuranceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="car_main">
+          <Key>
+            <PropertyRef Name="car_key" />
+          </Key>
+          <Property Name="car_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="insuree_key" Type="Int32" Nullable="false" />
+          <Property Name="car_year" Type="Int32" Nullable="false" />
+          <Property Name="car_make" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="car_model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="insuree_main" Relationship="Self.fk_carMain" FromRole="car_main" ToRole="insuree_main" />
+        </EntityType>
+        <EntityType Name="insuree_hist">
+          <Key>
+            <PropertyRef Name="hist_key" />
+          </Key>
+          <Property Name="hist_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="insuree_key" Type="Int32" Nullable="false" />
+          <Property Name="dui" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="tickets" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="insuree_main" Relationship="Self.fk_insureeHist" FromRole="insuree_hist" ToRole="insuree_main" />
+        </EntityType>
+        <EntityType Name="insuree_info">
+          <Key>
+            <PropertyRef Name="info_key" />
+          </Key>
+          <Property Name="info_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="insuree_key" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="zip" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="insuree_main" Relationship="Self.fk_addressContact" FromRole="insuree_info" ToRole="insuree_main" />
+        </EntityType>
+        <EntityType Name="insuree_main">
+          <Key>
+            <PropertyRef Name="insuree_key" />
+          </Key>
+          <Property Name="insuree_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login_user_key" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="upd_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="car_main" Relationship="Self.fk_carMain" FromRole="insuree_main" ToRole="car_main" />
+          <NavigationProperty Name="insuree_hist" Relationship="Self.fk_insureeHist" FromRole="insuree_main" ToRole="insuree_hist" />
+          <NavigationProperty Name="insuree_info" Relationship="Self.fk_addressContact" FromRole="insuree_main" ToRole="insuree_info" />
+          <NavigationProperty Name="insuree_quote" Relationship="Self.fk_insureeQuote" FromRole="insuree_main" ToRole="insuree_quote" />
+          <NavigationProperty Name="login_main" Relationship="Self.fk_loginUserKey" FromRole="insuree_main" ToRole="login_main" />
+        </EntityType>
+        <EntityType Name="insuree_quote">
+          <Key>
+            <PropertyRef Name="quote_key" />
+          </Key>
+          <Property Name="quote_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="insuree_key" Type="Int32" Nullable="false" />
+          <Property Name="coverage_type" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="curr_quote" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="prev_quote" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="insuree_main" Relationship="Self.fk_insureeQuote" FromRole="insuree_quote" ToRole="insuree_main" />
+        </EntityType>
+        <EntityType Name="login_main">
+          <Key>
+            <PropertyRef Name="login_user_key" />
+          </Key>
+          <Property Name="login_user_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="insuree_main" Relationship="Self.fk_loginUserKey" FromRole="login_main" ToRole="insuree_main" />
+        </EntityType>
+        <EntityType Name="vinsuree_data_all">
+          <Key>
+            <PropertyRef Name="insuree_key" />
+            <PropertyRef Name="first_name" />
+            <PropertyRef Name="last_name" />
+          </Key>
+          <Property Name="insuree_key" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="dob" Type="DateTime" Precision="3" />
+          <Property Name="state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="zip" Type="Int32" />
+          <Property Name="car_year" Type="Int32" />
+          <Property Name="car_make" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="car_model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="coverage_type" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="dui" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="tickets" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="curr_quote" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="prev_quote" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vlogin_user_all">
+          <Key>
+            <PropertyRef Name="login_user_key" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="password" />
+          </Key>
+          <Property Name="insuree_key" Type="Int32" />
+          <Property Name="login_user_key" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_carMain">
+          <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
+          <End Role="car_main" Type="Self.car_main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insuree_main">
+              <PropertyRef Name="insuree_key" />
+            </Principal>
+            <Dependent Role="car_main">
+              <PropertyRef Name="insuree_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_insureeHist">
+          <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
+          <End Role="insuree_hist" Type="Self.insuree_hist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insuree_main">
+              <PropertyRef Name="insuree_key" />
+            </Principal>
+            <Dependent Role="insuree_hist">
+              <PropertyRef Name="insuree_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_addressContact">
+          <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
+          <End Role="insuree_info" Type="Self.insuree_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insuree_main">
+              <PropertyRef Name="insuree_key" />
+            </Principal>
+            <Dependent Role="insuree_info">
+              <PropertyRef Name="insuree_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_insureeQuote">
+          <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="1" />
+          <End Role="insuree_quote" Type="Self.insuree_quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="insuree_main">
+              <PropertyRef Name="insuree_key" />
+            </Principal>
+            <Dependent Role="insuree_quote">
+              <PropertyRef Name="insuree_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_loginUserKey">
+          <End Role="login_main" Type="Self.login_main" Multiplicity="1" />
+          <End Role="insuree_main" Type="Self.insuree_main" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login_main">
+              <PropertyRef Name="login_user_key" />
+            </Principal>
+            <Dependent Role="insuree_main">
+              <PropertyRef Name="login_user_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_insuranceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="car_main" EntityType="Self.car_main" />
+          <EntitySet Name="insuree_hist" EntityType="Self.insuree_hist" />
+          <EntitySet Name="insuree_info" EntityType="Self.insuree_info" />
+          <EntitySet Name="insuree_main" EntityType="Self.insuree_main" />
+          <EntitySet Name="insuree_quote" EntityType="Self.insuree_quote" />
+          <EntitySet Name="login_main" EntityType="Self.login_main" />
+          <EntitySet Name="vinsuree_data_all" EntityType="Self.vinsuree_data_all" />
+          <EntitySet Name="vlogin_user_all" EntityType="Self.vlogin_user_all" />
+          <AssociationSet Name="fk_carMain" Association="Self.fk_carMain">
+            <End Role="insuree_main" EntitySet="insuree_main" />
+            <End Role="car_main" EntitySet="car_main" />
+          </AssociationSet>
+          <AssociationSet Name="fk_insureeHist" Association="Self.fk_insureeHist">
+            <End Role="insuree_main" EntitySet="insuree_main" />
+            <End Role="insuree_hist" EntitySet="insuree_hist" />
+          </AssociationSet>
+          <AssociationSet Name="fk_addressContact" Association="Self.fk_addressContact">
+            <End Role="insuree_main" EntitySet="insuree_main" />
+            <End Role="insuree_info" EntitySet="insuree_info" />
+          </AssociationSet>
+          <AssociationSet Name="fk_insureeQuote" Association="Self.fk_insureeQuote">
+            <End Role="insuree_main" EntitySet="insuree_main" />
+            <End Role="insuree_quote" EntitySet="insuree_quote" />
+          </AssociationSet>
+          <AssociationSet Name="fk_loginUserKey" Association="Self.fk_loginUserKey">
+            <End Role="login_main" EntitySet="login_main" />
+            <End Role="insuree_main" EntitySet="insuree_main" />
+          </AssociationSet>
+          <FunctionImport Name="spGetInsureeKey" ReturnType="Collection(db_insuranceModel.spGetInsureeKey_Result)">
+            <Parameter Name="insuree_key" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spGetInsureeKey_Result">
+          <Property Type="String" Name="Column1" Nullable="false" MaxLength="7" />
+          <Property Type="Int32" Name="retval" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_insuranceModelStoreContainer" CdmEntityContainer="db_insuranceEntities">
+          <EntitySetMapping Name="car_main">
+            <EntityTypeMapping TypeName="db_insuranceModel.car_main">
+              <MappingFragment StoreEntitySet="car_main">
+                <ScalarProperty Name="car_key" ColumnName="car_key" />
+                <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+                <ScalarProperty Name="car_year" ColumnName="car_year" />
+                <ScalarProperty Name="car_make" ColumnName="car_make" />
+                <ScalarProperty Name="car_model" ColumnName="car_model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="insuree_hist">
+            <EntityTypeMapping TypeName="db_insuranceModel.insuree_hist">
+              <MappingFragment StoreEntitySet="insuree_hist">
+                <ScalarProperty Name="hist_key" ColumnName="hist_key" />
+                <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+                <ScalarProperty Name="dui" ColumnName="dui" />
+                <ScalarProperty Name="tickets" ColumnName="tickets" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="insuree_info">
+            <EntityTypeMapping TypeName="db_insuranceModel.insuree_info">
+              <MappingFragment StoreEntitySet="insuree_info">
+                <ScalarProperty Name="info_key" ColumnName="info_key" />
+                <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="insuree_main">
+            <EntityTypeMapping TypeName="db_insuranceModel.insuree_main">
+              <MappingFragment StoreEntitySet="insuree_main">
+                <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+                <ScalarProperty Name="login_user_key" ColumnName="login_user_key" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="upd_date" ColumnName="upd_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="insuree_quote">
+            <EntityTypeMapping TypeName="db_insuranceModel.insuree_quote">
+              <MappingFragment StoreEntitySet="insuree_quote">
+                <ScalarProperty Name="quote_key" ColumnName="quote_key" />
+                <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+                <ScalarProperty Name="coverage_type" ColumnName="coverage_type" />
+                <ScalarProperty Name="curr_quote" ColumnName="curr_quote" />
+                <ScalarProperty Name="prev_quote" ColumnName="prev_quote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="login_main">
+            <EntityTypeMapping TypeName="db_insuranceModel.login_main">
+              <MappingFragment StoreEntitySet="login_main">
+                <ScalarProperty Name="login_user_key" ColumnName="login_user_key" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vinsuree_data_all">
+            <EntityTypeMapping TypeName="db_insuranceModel.vinsuree_data_all">
+              <MappingFragment StoreEntitySet="vinsuree_data_all">
+                <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="car_year" ColumnName="car_year" />
+                <ScalarProperty Name="car_make" ColumnName="car_make" />
+                <ScalarProperty Name="car_model" ColumnName="car_model" />
+                <ScalarProperty Name="coverage_type" ColumnName="coverage_type" />
+                <ScalarProperty Name="dui" ColumnName="dui" />
+                <ScalarProperty Name="tickets" ColumnName="tickets" />
+                <ScalarProperty Name="curr_quote" ColumnName="curr_quote" />
+                <ScalarProperty Name="prev_quote" ColumnName="prev_quote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vlogin_user_all">
+            <EntityTypeMapping TypeName="db_insuranceModel.vlogin_user_all">
+              <MappingFragment StoreEntitySet="vlogin_user_all">
+                <ScalarProperty Name="insuree_key" ColumnName="insuree_key" />
+                <ScalarProperty Name="login_user_key" ColumnName="login_user_key" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetInsureeKey" FunctionName="db_insuranceModel.Store.spGetInsureeKey">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_insuranceModel.spGetInsureeKey_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="retval" ColumnName="retval" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
