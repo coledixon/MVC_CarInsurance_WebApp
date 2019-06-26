@@ -13,6 +13,7 @@ namespace CarInsurance_WebApp.Controllers
             return View();
         }
 
+        [Authorize] // only auth users can access this page
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -20,6 +21,7 @@ namespace CarInsurance_WebApp.Controllers
             return View();
         }
 
+        [Authorize] // only auth users can access this page
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

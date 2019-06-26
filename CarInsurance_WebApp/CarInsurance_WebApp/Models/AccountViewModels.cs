@@ -42,8 +42,8 @@ namespace CarInsurance_WebApp.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string Username { get; set; }
     }
 
     public class LoginViewModel
