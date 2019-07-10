@@ -13,21 +13,23 @@ GO
 
 /* --- TABLES --- */
 -- each table reqs primary key for Entity Framework
-IF OBJECT_ID('dbo.login_main') is null
-BEGIN
-	--master login table
-	CREATE TABLE login_main (
-			[login_user_key] int IDENTITY(1,1),
-			[username] varchar(25) not null,
-			[password] varchar(10) not null
-		PRIMARY KEY NONCLUSTERED
-		(
-			[login_user_key]
-		) ON [PRIMARY]
-	)
-END
 
-GO
+-- CD REMOVED: Entity handles login (cannot find way to override this)
+--IF OBJECT_ID('dbo.login_main') is null
+--BEGIN
+--	--master login table
+--	CREATE TABLE login_main (
+--			[login_user_key] int IDENTITY(1,1),
+--			[username] varchar(25) not null,
+--			[password] varchar(10) not null
+--		PRIMARY KEY NONCLUSTERED
+--		(
+--			[login_user_key]
+--		) ON [PRIMARY]
+--	)
+--END
+
+--GO
 
 IF OBJECT_ID('dbo.insuree_main') is null
 BEGIN
@@ -78,31 +80,33 @@ END
 
 GO
 
-
-IF OBJECT_ID('dbo.car_main') is null
+IF OBJECT_ID('dbo.insuree_car') is null
 BEGIN
-	-- master car table
-	CREATE TABLE car_main (
-			[car_key] int IDENTITY(1,1),
+	-- insuree car info
+	CREATE TABLE insuree_car (
+			[insuree_car_key] int IDENTITY(1,1),
+			[car_key] int not null,
 			[insuree_key] int not null,
-			[car_year] int not null,
-			[car_make] varchar(50) not null,
-			[car_model] varchar(50) not null,
+			[car_year_key] int not null,
+			[car_make_key] varchar(50) not null,
+			[car_model_key] varchar(50) not null,
 		PRIMARY KEY NONCLUSTERED
 		(
-			[car_key] ASC
+			[insuree_car_key] ASC
 		) ON [PRIMARY],
 
-		CONSTRAINT fk_carMain FOREIGN KEY (insuree_key) REFERENCES insuree_main(insuree_key)
+		CONSTRAINT fk_carInsuree FOREIGN KEY (insuree_key) REFERENCES insuree_main(insuree_key),
+		CONSTRAINT fk_carMake FOREIGN KEY (car_make_key) REFERENCES car_make(car_make_key),
+		CONSTRAINT fk_carModel FOREIGN KEY (car_model_key) REFERENCES car_model(car_model_key),
+		CONSTRAINT fk_carYear FOREIGN KEY (car_year_key) REFERENCES car_year(car_year_key)
 	)
 
-		CREATE UNIQUE NONCLUSTERED INDEX natKey_carMain ON car_main (
+		CREATE UNIQUE NONCLUSTERED INDEX natKey_insureeCar ON insuree_car (
 			[insuree_key]
 		)
 END
 
 GO
-
 IF OBJECT_ID('dbo.insuree_quote') is null
 BEGIN
 	-- associated quote
@@ -146,6 +150,56 @@ BEGIN
 		CREATE UNIQUE NONCLUSTERED INDEX natKey_insureeHist ON insuree_hist (
 			[insuree_key]
 		)
+END
+
+GO
+
+-- dropdown tables for car information
+IF OBJECT_ID('dbo.car_make') is null
+BEGIN
+	-- car make(s)
+	CREATE TABLE car_make (
+			[car_make_key] int IDENTITY(1,1),
+			-- CD REMOVED [car_model_key] int not null,
+			[car_make] varchar(20) not null,
+		PRIMARY KEY NONCLUSTERED
+		(
+			[car_make_key] ASC
+		) ON [PRIMARY],
+	)
+END
+
+GO
+
+IF OBJECT_ID('dbo.car_model') is null
+BEGIN
+	-- car models(s)
+	CREATE TABLE car_model (
+			[car_model_key] int IDENTITY(1,1),
+			[car_make_key] int not null,
+			[car_model] varchar(25) not null,
+		PRIMARY KEY NONCLUSTERED
+		(
+			[car_model_key] ASC
+		) ON [PRIMARY],
+
+		CONSTRAINT fk_carModel FOREIGN KEY (car_make_key) REFERENCES car_make(car_make_key)
+	)
+END
+
+GO
+
+IF OBJECT_ID('dbo.car_year') is null
+BEGIN
+	-- car year(s)
+	CREATE TABLE car_year (
+			[car_year_key] int IDENTITY(1,1),
+			[car_year] int not null,
+		PRIMARY KEY NONCLUSTERED
+		(
+			[car_year_key] ASC
+		) ON [PRIMARY],
+	)
 END
 
 GO
