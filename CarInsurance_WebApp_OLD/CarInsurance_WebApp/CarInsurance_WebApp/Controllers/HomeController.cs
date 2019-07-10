@@ -46,7 +46,7 @@ namespace CarInsurance_WebApp.Controllers
             List<string> dui = new List<string>();
             dui = _ext.DUI();
 
-            ViewBag.Dui = new SelectList(dui, "dui", "dui2");
+            ViewBag.Dui = new SelectList(dui, "dui");
 
             return View();
         }

@@ -82,17 +82,12 @@
             @Html.ValidationMessageFor(model => model.tickets, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group">
+    <div class="input">
         @Html.LabelFor(model => model.dui, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("dui_val", new List<SelectListItem>()
-            {
-                new SelectListItem{ Text = "true", Value = "1", Selected = true },
-                new SelectListItem{ Text = "false", Value = "0" }
-
-            }, "-- dui options --")
+            @Html.DropDownList("--DUI options--", new SelectList(ViewBag.Dui, "dui"))
         </div>
-    </div>  
+    </div> 
 
      <div class="form-group">
         @Html.LabelFor(model => model.coverage_type, htmlAttributes: new { @class = "control-label col-md-2" })

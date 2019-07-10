@@ -86,10 +86,11 @@ namespace CarInsurance_WebApp.Controllers
         #region dropdown
         public List<string> DUI()
         {
-            var dui = new List<string>();
-
-            dui.Add("true");
-            dui.Add("false");
+            var dui = new List<string>
+            {
+                "true",
+                "false"
+            };
 
             return dui;
         }
