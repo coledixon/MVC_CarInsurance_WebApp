@@ -1,5 +1,5 @@
 ﻿/* SCHEMA FOR C# MVC WEB APPLICATION */
-/* Copyright 2018 || Cole Dixon || All rights reserved */
+/* Copyright 2019 || Cole Dixon || All rights reserved */
 
 IF NOT EXISTS(SELECT name FROM sys.databases WHERE name ='db_insurance')
 BEGIN
@@ -36,7 +36,7 @@ BEGIN
 	-- master insuree table
 	CREATE TABLE insuree_main (
 			[insuree_key] int IDENTITY(1,1),
-			[login_user_key] int not null,
+			-- CD REMOVED: [login_user_key] int not null,
 			[first_name] varchar(50) not null,
 			[last_name] varchar(50) not null,
 			[create_date] datetime not null,
@@ -44,9 +44,9 @@ BEGIN
 		PRIMARY KEY NONCLUSTERED 
 		(
 			[insuree_key] ASC
-		) ON [PRIMARY],
+		) ON [PRIMARY]
 
-		CONSTRAINT fk_loginUserKey FOREIGN KEY (login_user_key) REFERENCES login_main(login_user_key)
+		-- CD REMOVED: CONSTRAINT fk_loginUserKey FOREIGN KEY (login_user_key) REFERENCES login_main(login_user_key)
 	)
 
 		ALTER TABLE insuree_main
@@ -138,7 +138,7 @@ BEGIN
 			[hist_key] int IDENTITY(1,1),
 			[insuree_key] int not null,
 			[dui] varchar(5) null,
-			[tickets] varchar(1) null,
+			[tickets] int null, -- 07/10/19 changed to int
 		PRIMARY KEY NONCLUSTERED
 		(
 			[hist_key] ASC

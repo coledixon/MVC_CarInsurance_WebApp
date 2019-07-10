@@ -27,15 +27,23 @@ GO
 	GO
 
 -----
+--- VIEW for car make / model / year information
+-----
+
+-- TO DO
+
+-----
 --- VIEW for user login information
 -----
-IF OBJECT_ID('dbo.vlogin_user_all') is not null  DROP VIEW [dbo].[vlogin_user_all]
-GO
 
-	CREATE VIEW [dbo].[vlogin_user_all]
-	AS
-	SELECT insuree_key, lm.login_user_key, lm.username, lm.password, first_name, last_name
-		FROM login_main lm
-		LEFT JOIN insuree_main im (NOLOCK) ON lm.login_user_key = im.login_user_key
+-- CD REMOVED THIS FUNCTIONALITY FROM THE APPLICATION
+--IF OBJECT_ID('dbo.vlogin_user_all') is not null  DROP VIEW [dbo].[vlogin_user_all]
+--GO
 
-	GO
+--	CREATE VIEW [dbo].[vlogin_user_all]
+--	AS
+--	SELECT insuree_key, lm.login_user_key, lm.username, lm.password, first_name, last_name
+--		FROM login_main lm
+--		LEFT JOIN insuree_main im (NOLOCK) ON lm.login_user_key = im.login_user_key
+
+--	GO
