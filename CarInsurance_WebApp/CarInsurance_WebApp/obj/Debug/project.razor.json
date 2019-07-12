@@ -1,0 +1,18 @@
+{
+  "FilePath": "c:\\Users\\Cole Dixon\\PROJECTS\\MVC_CarInsurance_WebApp\\CarInsurance_WebApp\\CarInsurance_WebApp\\CarInsurance_WebApp.csproj",
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  },
+  "ProjectWorkspaceState": {
+    "TagHelpers": [],
+    "CSharpLanguageVersion": 703
+  },
+  "RootNamespace": null,
+  "Documents": []
+}
