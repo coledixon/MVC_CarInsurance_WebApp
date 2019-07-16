@@ -85,6 +85,14 @@
     <div class="input">
         @Html.LabelFor(model => model.dui, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
+            <label for="inputState">DUI</label>
+            <select name="dui" class="form-control" required>
+                <option value="">SELECT</option>
+                @foreach (var i in ViewBag.Dui)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
             @Html.DropDownList("--DUI options--", new SelectList(ViewBag.Dui, "dui"))
         </div>
     </div> 
